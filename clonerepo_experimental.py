@@ -11,13 +11,13 @@ def run_script():
         process = subprocess.run(cmd, shell=True, check=True, text=True)
         return process.stdout
 
-    # Change the current directory to /content/
-    os.chdir('/content/')
-    print("Changing dir to /content/")
+    # Change the current directory to /kaggle/working/
+    os.chdir('/kaggle/working/')
+    print("Changing dir to /kaggle/working/")
 
     # Your function to edit the file
     def edit_file(file_path):
-        temp_file_path = "/tmp/temp_file.py"
+        temp_file_path = "/kaggle/working/tmp/temp_file.py"
         changes_made = False
         with open(file_path, "r") as file, open(temp_file_path, "w") as temp_file:
             previous_line = ""
@@ -99,7 +99,7 @@ def run_script():
             print("No changes were needed.")
 
     # Define the repo path
-    repo_path = '/content/Retrieval-based-Voice-Conversion-WebUI'
+    repo_path = '/kaggle/working/Retrieval-based-Voice-Conversion-WebUI'
 
     def copy_all_files_in_directory(src_dir, dest_dir):
         # Iterate over all files in source directory
@@ -117,7 +117,7 @@ def run_script():
         # New repository link
         new_repo_link = "https://github.com/alexlnkp/Mangio-RVC-Tweaks/"
         # Temporary path to clone the repository
-        temp_repo_path = "/content/temp_Mangio-RVC-Fork"
+        temp_repo_path = "/kaggle/working/temp_Mangio-RVC-Fork"
         # New folder name
         new_folder_name = "Mangio-RVC-Fork"
 
@@ -135,9 +135,9 @@ def run_script():
         copy_all_files_in_directory(temp_repo_path, repo_path)
         print(f"Copying all {new_folder_name} files from GitHub.")
 
-        # Change working directory back to /content/
-        os.chdir('/content/')
-        print("Changed path back to /content/")
+        # Change working directory back to /kaggle/working/
+        os.chdir('/kaggle/working/')
+        print("Changed path back to /kaggle/working/")
         
         # Remove the temporary cloned repository
         shutil.rmtree(temp_repo_path)
@@ -146,20 +146,20 @@ def run_script():
     clone_and_copy_repo(repo_path)
 
     # Download the credentials file for RVC archive sheet
-    os.makedirs('/content/Retrieval-based-Voice-Conversion-WebUI/stats/', exist_ok=True)
-    run_cmd("wget -q https://cdn.discordapp.com/attachments/945486970883285045/1114717554481569802/peppy-generator-388800-07722f17a188.json -O /content/Retrieval-based-Voice-Conversion-WebUI/stats/peppy-generator-388800-07722f17a188.json")
+    os.makedirs('/kaggle/working/Retrieval-based-Voice-Conversion-WebUI/stats/', exist_ok=True)
+    run_cmd("wget -q https://cdn.discordapp.com/attachments/945486970883285045/1114717554481569802/peppy-generator-388800-07722f17a188.json -O /kaggle/working/Retrieval-based-Voice-Conversion-WebUI/stats/peppy-generator-388800-07722f17a188.json")
 
     # Forcefully delete any existing torchcrepe dependencies downloaded from an earlier run just in case
-    shutil.rmtree('/content/Retrieval-based-Voice-Conversion-WebUI/torchcrepe', ignore_errors=True)
-    shutil.rmtree('/content/torchcrepe', ignore_errors=True)
+    shutil.rmtree('/kaggle/working/Retrieval-based-Voice-Conversion-WebUI/torchcrepe', ignore_errors=True)
+    shutil.rmtree('/kaggle/working/torchcrepe', ignore_errors=True)
 
     # Download the torchcrepe folder from the maxrmorrison/torchcrepe repository
     run_cmd("git clone https://github.com/maxrmorrison/torchcrepe.git")
-    shutil.move('/content/torchcrepe/torchcrepe', '/content/Retrieval-based-Voice-Conversion-WebUI/')
-    shutil.rmtree('/content/torchcrepe', ignore_errors=True)  # Delete the torchcrepe repository folder
+    shutil.move('/kaggle/working/torchcrepe/torchcrepe', '/kaggle/working/Retrieval-based-Voice-Conversion-WebUI/')
+    shutil.rmtree('/kaggle/working/torchcrepe', ignore_errors=True)  # Delete the torchcrepe repository folder
 
     # Change the current directory to /content/Retrieval-based-Voice-Conversion-WebUI
-    os.chdir('/content/Retrieval-based-Voice-Conversion-WebUI')
+    os.chdir('/kaggle/working/Retrieval-based-Voice-Conversion-WebUI')
     os.makedirs('pretrained', exist_ok=True)
     os.makedirs('uvr5_weights', exist_ok=True)
 
@@ -195,7 +195,7 @@ def download_pretrained_models():
     }
 
     base_url = "https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/"
-    base_path = "/content/Retrieval-based-Voice-Conversion-WebUI/"
+    base_path = "/kaggle/working/Retrieval-based-Voice-Conversion-WebUI/"
 
     # Calculate total number of files to download
     total_files = sum(len(files) for files in pretrained_models.values()) + 1  # +1 for hubert_base.pt
