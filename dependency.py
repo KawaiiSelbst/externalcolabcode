@@ -13,8 +13,8 @@ def install_packages_but_jank_af():
                     'ffmpeg', 'ffmpeg-python', 'praat-parselmouth', 'pyworld', 'numpy==1.23.5',
                     'numba==0.56.4', 'librosa==0.9.2', 'mega.py', 'gdown', 'onnxruntime', 'pyngrok==4.1.12',
                     'gTTS', 'elevenlabs']
-    subprocess.run(["apt-get", "update"]) 
-    subprocess.run(["pip", "install --upgrade --force-reinstall scipy==1.9.3 numpy==1.22.4"]) 
+    subprocess.run(["apt-get update"]) 
+    subprocess.run(["pip install --upgrade --force-reinstall scipy==1.9.3 numpy==1.22.4"]) 
     print("Updating and installing system packages...")
     for package in packages:
         print(f"Installing {package}...")
