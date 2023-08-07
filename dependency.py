@@ -31,6 +31,8 @@ def setup_environment(ForceUpdateDependencies, ForceTemporaryStorage, Creds, Ser
     if not ForceTemporaryStorage:
         if Service == 'Mega':
             from rclone.rclone import Rclone
+            rc = Rclone()
+
 
             if not 'Mega:' in rc.execute('listremotes'):
                 rc.config(
